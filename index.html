@@ -1,4 +1,3 @@
-<!-- Save this file as index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,7 +7,455 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* (The full CSS from your original code goes here) */
+        :root {
+            --primary: #5D9CEC;  /* Blue ciel */
+            --primary-dark: #4A89DC;
+            --secondary: #FF7AA2;  /* Pink */
+            --secondary-light: #FFB8D0;
+            --accent: #2D3436;     /* Black accent */
+            --dark: #1E1E1E;
+            --dark-light: #636E72;
+            --light: #F5F6FA;
+            --white: #FFFFFF;
+            --success: #48CFAD;
+            --error: #FC5C65;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--dark);
+            color: var(--light);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Animated Background */
+        .bg-animation {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .bg-circle {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0.15;
+            animation: float 15s infinite linear;
+        }
+
+        .circle-1 {
+            width: 300px;
+            height: 300px;
+            background: var(--primary);
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .circle-2 {
+            width: 400px;
+            height: 400px;
+            background: var(--secondary);
+            top: 60%;
+            left: 70%;
+            animation-delay: 3s;
+        }
+
+        .circle-3 {
+            width: 250px;
+            height: 250px;
+            background: var(--accent);
+            top: 30%;
+            left: 50%;
+            animation-delay: 6s;
+        }
+
+        .circle-4 {
+            width: 350px;
+            height: 350px;
+            background: var(--primary-dark);
+            top: 70%;
+            left: 20%;
+            animation-delay: 9s;
+        }
+
+        .circle-5 {
+            width: 200px;
+            height: 200px;
+            background: var(--secondary-light);
+            top: 10%;
+            left: 80%;
+            animation-delay: 12s;
+        }
+
+        .auth-container {
+            width: 100%;
+            max-width: 420px;
+            background-color: rgba(45, 52, 54, 0.85);
+            border-radius: 16px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            padding: 40px;
+            position: relative;
+            z-index: 1;
+            animation: fadeInUp 0.6s ease-out;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin: 20px;
+        }
+
+        .auth-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            z-index: 2;
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .logo h1 {
+            font-size: 28px;
+            font-weight: 700;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 8px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .logo p {
+            color: var(--light);
+            font-size: 14px;
+            opacity: 0.8;
+        }
+
+        .auth-header {
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .auth-header h2 {
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--white);
+            margin-bottom: 8px;
+        }
+
+        .auth-header p {
+            color: var(--light);
+            font-size: 14px;
+            opacity: 0.8;
+        }
+
+        .social-auth {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .social-btn {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--white);
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 18px;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .social-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .social-btn.google { color: #fff; background-color: rgba(219, 68, 55, 0.8); }
+        .social-btn.facebook { color: #fff; background-color: rgba(66, 103, 178, 0.8); }
+        .social-btn.apple { color: #fff; background-color: rgba(0, 0, 0, 0.8); }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 25px 0;
+            color: var(--light);
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.6;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            margin: 0 10px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--light);
+            opacity: 0.9;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 14px 16px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            color: var(--white);
+        }
+
+        .form-control::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(93, 156, 236, 0.2);
+            background-color: rgba(255, 255, 255, 0.15);
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 15px;
+            top: 40px;
+            transform: translateY(-50%);
+            color: rgba(255, 255, 255, 0.6);
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .password-toggle:hover {
+            color: var(--white);
+        }
+
+        .options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            font-size: 14px;
+        }
+
+        .remember-me {
+            display: flex;
+            align-items: center;
+        }
+
+        .remember-me input {
+            margin-right: 8px;
+            accent-color: var(--primary);
+        }
+
+        .remember-me label {
+            color: var(--light);
+            opacity: 0.8;
+        }
+
+        .auth-link {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .auth-link:hover {
+            color: var(--secondary-light);
+            text-decoration: underline;
+        }
+
+        .auth-btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            color: var(--white);
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(93, 156, 236, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .auth-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+        }
+
+        .auth-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(93, 156, 236, 0.4);
+        }
+
+        .auth-btn:hover::before {
+            left: 100%;
+        }
+
+        .auth-btn:active {
+            transform: translateY(0);
+        }
+
+        .switch-auth {
+            text-align: center;
+            font-size: 14px;
+            color: var(--light);
+            opacity: 0.8;
+        }
+
+        .switch-auth a {
+            color: var(--primary);
+            font-weight: 600;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .switch-auth a:hover {
+            color: var(--secondary-light);
+            text-decoration: underline;
+        }
+
+        .success-message {
+            color: var(--success);
+            font-size: 14px;
+            text-align: center;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+            25% {
+                transform: translate(50px, 30px) rotate(5deg);
+            }
+            50% {
+                transform: translate(100px, 0) rotate(0deg);
+            }
+            75% {
+                transform: translate(50px, -30px) rotate(-5deg);
+            }
+            100% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 0.15;
+            }
+            50% {
+                transform: scale(1.1);
+                opacity: 0.2;
+            }
+        }
+
+        /* Page Transitions */
+        .page {
+            display: none;
+            animation: fadeInUp 0.4s ease-out;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 480px) {
+            .auth-container {
+                padding: 30px 20px;
+                margin: 0 15px;
+            }
+            
+            .bg-circle {
+                filter: blur(40px);
+            }
+        }
+
+        /* Accessibility */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border-width: 0;
+        }
+
+        :focus-visible {
+            outline: 2px solid var(--primary);
+            outline-offset: 2px;
+        }
     </style>
 </head>
 <body>
@@ -21,19 +468,19 @@
         <div class="bg-circle circle-5"></div>
     </div>
 
-    <!-- Login Container -->
-    <div class="login-container">
+    <!-- Login Page -->
+    <div class="auth-container page active" id="login-page">
         <div class="logo">
             <h1>Crystal Market</h1>
             <p>Premium services at your fingertips 💸🐰⬇️</p>
         </div>
 
-        <div class="login-header">
+        <div class="auth-header">
             <h2>Welcome Back</h2>
             <p>Sign in to access your Crystal Market services</p>
         </div>
 
-        <div class="social-login">
+        <div class="social-auth">
             <button class="social-btn google" aria-label="Sign in with Google">
                 <i class="fab fa-google"></i>
             </button>
@@ -49,14 +496,14 @@
 
         <form id="loginForm">
             <div class="form-group">
-                <label for="email">Email Address</label>
-                <input type="email" id="email" class="form-control" placeholder="your@email.com" required>
+                <label for="login-email">Email Address</label>
+                <input type="email" id="login-email" class="form-control" placeholder="your@email.com" required>
             </div>
 
             <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" id="password" class="form-control" placeholder="••••••••" required>
-                <i class="fas fa-eye password-toggle" id="togglePassword"></i>
+                <label for="login-password">Password</label>
+                <input type="password" id="login-password" class="form-control" placeholder="••••••••" required>
+                <i class="fas fa-eye password-toggle" id="toggle-login-password"></i>
             </div>
 
             <div class="options">
@@ -64,59 +511,270 @@
                     <input type="checkbox" id="remember">
                     <label for="remember">Remember me</label>
                 </div>
-                <a href="#" class="forgot-password">Forgot password?</a>
+                <a href="#" class="auth-link" id="show-forgot-password">Forgot password?</a>
             </div>
 
-            <button type="submit" class="login-btn">
+            <button type="submit" class="auth-btn">
                 <i class="fas fa-sign-in-alt"></i> Sign In
             </button>
         </form>
 
-        <div class="register-link">
-            Don't have an account? <a href="#">Create one</a>
+        <div class="switch-auth">
+            Don't have an account? <a href="#" id="show-signup">Create one</a>
+        </div>
+    </div>
+
+    <!-- Signup Page -->
+    <div class="auth-container page" id="signup-page">
+        <div class="logo">
+            <h1>Crystal Market</h1>
+            <p>Join our premium services 💎✨</p>
+        </div>
+
+        <div class="auth-header">
+            <h2>Create Account</h2>
+            <p>Get started with Crystal Market</p>
+        </div>
+
+        <div class="social-auth">
+            <button class="social-btn google" aria-label="Sign up with Google">
+                <i class="fab fa-google"></i>
+            </button>
+            <button class="social-btn facebook" aria-label="Sign up with Facebook">
+                <i class="fab fa-facebook-f"></i>
+            </button>
+            <button class="social-btn apple" aria-label="Sign up with Apple">
+                <i class="fab fa-apple"></i>
+            </button>
+        </div>
+
+        <div class="divider">or sign up with email</div>
+
+        <form id="signupForm">
+            <div class="form-group">
+                <label for="signup-name">Full Name</label>
+                <input type="text" id="signup-name" class="form-control" placeholder="John Doe" required>
+            </div>
+
+            <div class="form-group">
+                <label for="signup-email">Email Address</label>
+                <input type="email" id="signup-email" class="form-control" placeholder="your@email.com" required>
+            </div>
+
+            <div class="form-group">
+                <label for="signup-password">Password</label>
+                <input type="password" id="signup-password" class="form-control" placeholder="••••••••" required>
+                <i class="fas fa-eye password-toggle" id="toggle-signup-password"></i>
+            </div>
+
+            <div class="form-group">
+                <label for="signup-confirm-password">Confirm Password</label>
+                <input type="password" id="signup-confirm-password" class="form-control" placeholder="••••••••" required>
+            </div>
+
+            <div class="options">
+                <div class="remember-me">
+                    <input type="checkbox" id="terms" required>
+                    <label for="terms">I agree to the <a href="#" class="auth-link">Terms of Service</a></label>
+                </div>
+            </div>
+
+            <button type="submit" class="auth-btn">
+                <i class="fas fa-user-plus"></i> Create Account
+            </button>
+        </form>
+
+        <div class="switch-auth">
+            Already have an account? <a href="#" id="show-login">Sign in</a>
+        </div>
+    </div>
+
+    <!-- Forgot Password Page -->
+    <div class="auth-container page" id="forgot-password-page">
+        <div class="logo">
+            <h1>Crystal Market</h1>
+            <p>Reset your password 🔑</p>
+        </div>
+
+        <div class="auth-header">
+            <h2>Forgot Password</h2>
+            <p>Enter your email to reset your password</p>
+        </div>
+
+        <form id="forgotPasswordForm">
+            <div class="form-group">
+                <label for="forgot-email">Email Address</label>
+                <input type="email" id="forgot-email" class="form-control" placeholder="your@email.com" required>
+            </div>
+
+            <div class="success-message" id="reset-success">
+                Password reset link has been sent to your email!
+            </div>
+
+            <button type="submit" class="auth-btn">
+                <i class="fas fa-paper-plane"></i> Send Reset Link
+            </button>
+        </form>
+
+        <div class="switch-auth">
+            Remember your password? <a href="#" id="show-login-from-forgot">Sign in</a>
         </div>
     </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const togglePassword = document.getElementById('togglePassword');
-            const password = document.getElementById('password');
-            togglePassword.addEventListener('click', function() {
-                const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
-                password.setAttribute('type', type);
-                this.classList.toggle('fa-eye-slash');
+            // Page navigation
+            const pages = {
+                login: document.getElementById('login-page'),
+                signup: document.getElementById('signup-page'),
+                forgot: document.getElementById('forgot-password-page')
+            };
+
+            // Show login page
+            document.getElementById('show-login').addEventListener('click', function(e) {
+                e.preventDefault();
+                switchPage('login');
             });
 
-            const loginForm = document.getElementById('loginForm');
-            loginForm.addEventListener('submit', function(e) {
+            document.getElementById('show-login-from-forgot').addEventListener('click', function(e) {
                 e.preventDefault();
-                const email = document.getElementById('email').value;
-                const password = document.getElementById('password').value;
-                const remember = document.getElementById('remember').checked;
+                switchPage('login');
+            });
 
+            // Show signup page
+            document.getElementById('show-signup').addEventListener('click', function(e) {
+                e.preventDefault();
+                switchPage('signup');
+            });
+
+            // Show forgot password page
+            document.getElementById('show-forgot-password').addEventListener('click', function(e) {
+                e.preventDefault();
+                switchPage('forgot');
+            });
+
+            function switchPage(page) {
+                // Hide all pages
+                Object.values(pages).forEach(p => p.classList.remove('active'));
+                
+                // Show selected page
+                pages[page].classList.add('active');
+                
+                // Reset forms
+                document.getElementById('reset-success').style.display = 'none';
+            }
+
+            // Password toggles
+            setupPasswordToggle('toggle-login-password', 'login-password');
+            setupPasswordToggle('toggle-signup-password', 'signup-password');
+
+            function setupPasswordToggle(toggleId, inputId) {
+                const toggle = document.getElementById(toggleId);
+                const input = document.getElementById(inputId);
+                
+                toggle.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const type = input.getAttribute('type') === 'password' ? 'text' : 'password';
+                    input.setAttribute('type', type);
+                    this.classList.toggle('fa-eye-slash');
+                });
+            }
+
+            // Form submissions
+            document.getElementById('loginForm').addEventListener('submit', handleLogin);
+            document.getElementById('signupForm').addEventListener('submit', handleSignup);
+            document.getElementById('forgotPasswordForm').addEventListener('submit', handleForgotPassword);
+
+            function handleLogin(e) {
+                e.preventDefault();
+                const email = document.getElementById('login-email').value;
+                const password = document.getElementById('login-password').value;
+                const remember = document.getElementById('remember').checked;
+                
                 if (!email || !password) {
                     alert('Please fill in all fields');
                     return;
                 }
-
-                const submitBtn = loginForm.querySelector('button[type="submit"]');
+                
+                const submitBtn = e.target.querySelector('button[type="submit"]');
                 const originalText = submitBtn.innerHTML;
                 submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Authenticating...';
                 submitBtn.disabled = true;
-
+                
                 setTimeout(() => {
                     console.log('Login attempt:', { email, password, remember });
                     submitBtn.innerHTML = originalText;
                     submitBtn.disabled = false;
                     alert('Welcome back to Crystal Market!');
                 }, 1500);
-            });
+            }
 
+            function handleSignup(e) {
+                e.preventDefault();
+                const name = document.getElementById('signup-name').value;
+                const email = document.getElementById('signup-email').value;
+                const password = document.getElementById('signup-password').value;
+                const confirmPassword = document.getElementById('signup-confirm-password').value;
+                const terms = document.getElementById('terms').checked;
+                
+                if (!name || !email || !password || !confirmPassword) {
+                    alert('Please fill in all fields');
+                    return;
+                }
+                
+                if (password !== confirmPassword) {
+                    alert('Passwords do not match');
+                    return;
+                }
+                
+                if (!terms) {
+                    alert('You must agree to the Terms of Service');
+                    return;
+                }
+                
+                const submitBtn = e.target.querySelector('button[type="submit"]');
+                const originalText = submitBtn.innerHTML;
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Creating account...';
+                submitBtn.disabled = true;
+                
+                setTimeout(() => {
+                    console.log('Signup attempt:', { name, email, password });
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.disabled = false;
+                    alert('Account created successfully! Welcome to Crystal Market.');
+                    switchPage('login');
+                }, 1500);
+            }
+
+            function handleForgotPassword(e) {
+                e.preventDefault();
+                const email = document.getElementById('forgot-email').value;
+                
+                if (!email) {
+                    alert('Please enter your email address');
+                    return;
+                }
+                
+                const submitBtn = e.target.querySelector('button[type="submit"]');
+                const originalText = submitBtn.innerHTML;
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+                submitBtn.disabled = true;
+                
+                setTimeout(() => {
+                    console.log('Password reset requested for:', email);
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.disabled = false;
+                    document.getElementById('reset-success').style.display = 'block';
+                }, 1500);
+            }
+
+            // Add floating animation to social buttons
             const socialButtons = document.querySelectorAll('.social-btn');
             socialButtons.forEach((btn, index) => {
                 btn.style.animation = `float 3s ease-in-out ${index * 0.2}s infinite`;
             });
 
+            // Add pulse animation to background circles
             const bgCircles = document.querySelectorAll('.bg-circle');
             bgCircles.forEach((circle, index) => {
                 circle.style.animation = `pulse ${8 + index * 2}s ease-in-out infinite`;
