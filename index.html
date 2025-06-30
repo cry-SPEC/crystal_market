@@ -1,0 +1,127 @@
+<!-- Save this file as index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crystal Market - Login</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* (The full CSS from your original code goes here) */
+    </style>
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="bg-animation">
+        <div class="bg-circle circle-1"></div>
+        <div class="bg-circle circle-2"></div>
+        <div class="bg-circle circle-3"></div>
+        <div class="bg-circle circle-4"></div>
+        <div class="bg-circle circle-5"></div>
+    </div>
+
+    <!-- Login Container -->
+    <div class="login-container">
+        <div class="logo">
+            <h1>Crystal Market</h1>
+            <p>Premium services at your fingertips 💸🐰⬇️</p>
+        </div>
+
+        <div class="login-header">
+            <h2>Welcome Back</h2>
+            <p>Sign in to access your Crystal Market services</p>
+        </div>
+
+        <div class="social-login">
+            <button class="social-btn google" aria-label="Sign in with Google">
+                <i class="fab fa-google"></i>
+            </button>
+            <button class="social-btn facebook" aria-label="Sign in with Facebook">
+                <i class="fab fa-facebook-f"></i>
+            </button>
+            <button class="social-btn apple" aria-label="Sign in with Apple">
+                <i class="fab fa-apple"></i>
+            </button>
+        </div>
+
+        <div class="divider">or continue with email</div>
+
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" class="form-control" placeholder="your@email.com" required>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" class="form-control" placeholder="••••••••" required>
+                <i class="fas fa-eye password-toggle" id="togglePassword"></i>
+            </div>
+
+            <div class="options">
+                <div class="remember-me">
+                    <input type="checkbox" id="remember">
+                    <label for="remember">Remember me</label>
+                </div>
+                <a href="#" class="forgot-password">Forgot password?</a>
+            </div>
+
+            <button type="submit" class="login-btn">
+                <i class="fas fa-sign-in-alt"></i> Sign In
+            </button>
+        </form>
+
+        <div class="register-link">
+            Don't have an account? <a href="#">Create one</a>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const togglePassword = document.getElementById('togglePassword');
+            const password = document.getElementById('password');
+            togglePassword.addEventListener('click', function() {
+                const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+                password.setAttribute('type', type);
+                this.classList.toggle('fa-eye-slash');
+            });
+
+            const loginForm = document.getElementById('loginForm');
+            loginForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const email = document.getElementById('email').value;
+                const password = document.getElementById('password').value;
+                const remember = document.getElementById('remember').checked;
+
+                if (!email || !password) {
+                    alert('Please fill in all fields');
+                    return;
+                }
+
+                const submitBtn = loginForm.querySelector('button[type="submit"]');
+                const originalText = submitBtn.innerHTML;
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Authenticating...';
+                submitBtn.disabled = true;
+
+                setTimeout(() => {
+                    console.log('Login attempt:', { email, password, remember });
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.disabled = false;
+                    alert('Welcome back to Crystal Market!');
+                }, 1500);
+            });
+
+            const socialButtons = document.querySelectorAll('.social-btn');
+            socialButtons.forEach((btn, index) => {
+                btn.style.animation = `float 3s ease-in-out ${index * 0.2}s infinite`;
+            });
+
+            const bgCircles = document.querySelectorAll('.bg-circle');
+            bgCircles.forEach((circle, index) => {
+                circle.style.animation = `pulse ${8 + index * 2}s ease-in-out infinite`;
+            });
+        });
+    </script>
+</body>
+</html>
